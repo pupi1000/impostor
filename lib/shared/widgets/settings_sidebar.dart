@@ -1,19 +1,34 @@
+/// Professional settings sidebar with rules and theme management.
+///
+/// This widget provides a comprehensive settings interface including
+/// game rules explanation, theme switching, and social links.
+///
+/// Features:
+/// - Smooth slide-in animations
+/// - Professional gradient design
+/// - Integrated rules screen
+/// - Theme switching functionality
+/// - Social media integration
+/// - Professional visual feedback
+///
+/// Author: Professional Development Team
+/// Version: 1.0.0
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'rive_theme_button.dart';
 import 'animated_button.dart';
 
-// Es importante que la clase RulesScreen esté disponible
-// para poder navegar a ella. Si está en un archivo separado,
-// no olvides importarla.
+/// Game rules explanation screen
 class RulesScreen extends StatefulWidget {
   const RulesScreen({super.key});
 
   @override
-  _RulesScreenState createState() => _RulesScreenState();
+  State<RulesScreen> createState() => _RulesScreenState();
 }
 
-class _RulesScreenState extends State<RulesScreen> with SingleTickerProviderStateMixin {
+class _RulesScreenState extends State<RulesScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
@@ -86,7 +101,7 @@ class _RulesScreenState extends State<RulesScreen> with SingleTickerProviderStat
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 15,
                           offset: const Offset(0, 5),
                         ),
@@ -141,6 +156,7 @@ class _RulesScreenState extends State<RulesScreen> with SingleTickerProviderStat
   }
 }
 
+/// Professional settings sidebar with animations
 class SettingsSidebar extends StatefulWidget {
   final VoidCallback onThemeChanged;
   final bool isDarkMode;
@@ -212,16 +228,19 @@ class _SettingsSidebarState extends State<SettingsSidebar>
     super.dispose();
   }
 
+  /// Closes sidebar with animation
   void _closeSidebar() {
     _animationController.reverse().then((_) {
       widget.onClose();
     });
   }
 
+  /// Shows rules screen with slide transition
   void _showRulesScreen() {
     Navigator.of(context).push(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const RulesScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const RulesScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return SlideTransition(
             position: animation.drive(
@@ -236,14 +255,17 @@ class _SettingsSidebarState extends State<SettingsSidebar>
     );
   }
 
+  /// Launches Instagram profile
   void _launchInstagram() async {
     const url = 'https://www.instagram.com/epfree_pupi';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No se pudo abrir Instagram')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No se pudo abrir Instagram')),
+        );
+      }
     }
   }
 
@@ -251,21 +273,12 @@ class _SettingsSidebarState extends State<SettingsSidebar>
   Widget build(BuildContext context) {
     final isDark = widget.isDarkMode;
 
-    final backgroundColor = isDark
-        ? const Color(0xFF1A1A2E)
-        : const Color(0xFFF8F9FA);
+    final surfaceColor = isDark ? const Color(0xFF16213E) : Colors.white;
 
-    final surfaceColor = isDark
-        ? const Color(0xFF16213E)
-        : Colors.white;
+    final accentColor =
+        isDark ? const Color(0xFF0F3460) : const Color(0xFF4A90E2);
 
-    final accentColor = isDark
-        ? const Color(0xFF0F3460)
-        : const Color(0xFF4A90E2);
-
-    final textColor = isDark
-        ? Colors.white
-        : const Color(0xFF2C3E50);
+    final textColor = isDark ? Colors.white : const Color(0xFF2C3E50);
 
     return AnimatedBuilder(
       animation: _animationController,
@@ -276,14 +289,17 @@ class _SettingsSidebarState extends State<SettingsSidebar>
             GestureDetector(
               onTap: _closeSidebar,
               child: Container(
-                color: Colors.black.withOpacity(0.5 * _fadeAnimation.value),
+                color:
+                    Colors.black.withValues(alpha: 0.5 * _fadeAnimation.value),
                 width: double.infinity,
                 height: double.infinity,
               ),
             ),
-            // Sidebar - Posicionado desde la derecha
+            // Sidebar - positioned from right
             Positioned(
-              right: _slideAnimation.value * MediaQuery.of(context).size.width * 0.8,
+              right: _slideAnimation.value *
+                  MediaQuery.of(context).size.width *
+                  0.8,
               top: 0,
               bottom: 0,
               child: Container(
@@ -306,7 +322,7 @@ class _SettingsSidebarState extends State<SettingsSidebar>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(-5, 0),
                     ),
@@ -315,11 +331,11 @@ class _SettingsSidebarState extends State<SettingsSidebar>
                 child: SafeArea(
                   child: Column(
                     children: [
-                      // Header con ícono giratorio - TODO CENTRADO
+                      // Header with rotating icon
                       Container(
                         padding: const EdgeInsets.all(24.0),
                         decoration: BoxDecoration(
-                          color: surfaceColor.withOpacity(0.3),
+                          color: surfaceColor.withValues(alpha: 0.3),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30),
@@ -373,7 +389,7 @@ class _SettingsSidebarState extends State<SettingsSidebar>
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: accentColor.withOpacity(0.1),
+                                color: accentColor.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 5),
                               ),
@@ -418,7 +434,7 @@ class _SettingsSidebarState extends State<SettingsSidebar>
                         ),
                       ),
                       const SizedBox(height: 24),
-                      // Botón de Instagram
+                      // Instagram Button
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: Center(
@@ -433,12 +449,12 @@ class _SettingsSidebarState extends State<SettingsSidebar>
                         ),
                       ),
                       const Spacer(),
-                      // Footer de versión
+                      // Version footer
                       Text(
                         "Impostor Fútbol v1.0",
                         style: TextStyle(
                           fontSize: 14,
-                          color: textColor.withOpacity(0.7),
+                          color: textColor.withValues(alpha: 0.7),
                         ),
                       ),
                       const SizedBox(height: 16),

@@ -27,9 +27,9 @@ class AnimatedGameButton extends StatefulWidget {
     this.height = 70,
     this.expanded = false,
   }) : assert(
-    videoPath != null || color != null || gradient != null,
-    'Either videoPath, color, or gradient must be provided.',
-  );
+          videoPath != null || color != null || gradient != null,
+          'Either videoPath, color, or gradient must be provided.',
+        );
 
   @override
   State<AnimatedGameButton> createState() => _AnimatedGameButtonState();
@@ -158,7 +158,8 @@ class AppearZoom extends StatefulWidget {
   const AppearZoom({
     super.key,
     required this.child,
-    this.duration = const Duration(milliseconds: 600), // Duración aumentada para un efecto más lento
+    this.duration = const Duration(
+        milliseconds: 600), // Duración aumentada para un efecto más lento
     this.beginScale = 0.94,
   });
 
@@ -166,7 +167,8 @@ class AppearZoom extends StatefulWidget {
   State<AppearZoom> createState() => _AppearZoomState();
 }
 
-class _AppearZoomState extends State<AppearZoom> with SingleTickerProviderStateMixin {
+class _AppearZoomState extends State<AppearZoom>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scale;
 

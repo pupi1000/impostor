@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   video_player: ^2.8.6
-  rive: ^0.13.4 # Versión más reciente y compatible con el SDK
+  # rive: ^0.13.4 # Temporalmente deshabilitado por conflicto ClangCL en Windows
   provider: ^6.1.1
   url_launcher: ^6.0.20
 
@@ -25,7 +25,7 @@ flutter:
   assets:
     - assets/icon.png
     - assets/videos/
-    - assets/rive/
+    # - assets/rive/ # Temporalmente deshabilitado
 
 flutter_launcher_icons:
   android: "ic_launcher"

@@ -1,5 +1,21 @@
+/// Professional theme toggle button with Rive-style animations.
+///
+/// This widget provides an animated theme switching button with
+/// smooth transitions and professional visual feedback.
+///
+/// Features:
+/// - Smooth scale and rotation animations
+/// - Dynamic gradient colors based on theme
+/// - Professional shadow effects
+/// - Touch feedback animations
+/// - Clean Material 3 design
+///
+/// Author: Professional Development Team
+/// Version: 1.0.0
+
 import 'package:flutter/material.dart';
 
+/// Professional theme toggle button with animations
 class RiveThemeButton extends StatefulWidget {
   final bool isDarkMode;
   final VoidCallback onPressed;
@@ -49,6 +65,7 @@ class _RiveThemeButtonState extends State<RiveThemeButton>
     super.dispose();
   }
 
+  /// Handles button press with animation
   void _handlePress() async {
     await _controller.forward();
     widget.onPressed();
@@ -71,7 +88,7 @@ class _RiveThemeButtonState extends State<RiveThemeButton>
                 height: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  gradient: LinearGradient( // CORREGIDO: Solo importamos de Flutter
+                  gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: widget.isDarkMode
@@ -89,8 +106,8 @@ class _RiveThemeButtonState extends State<RiveThemeButton>
                   boxShadow: [
                     BoxShadow(
                       color: widget.isDarkMode
-                          ? Colors.orange.withOpacity(0.4)
-                          : Colors.blue.withOpacity(0.4),
+                          ? Colors.orange.withValues(alpha: 0.4)
+                          : Colors.blue.withValues(alpha: 0.4),
                       blurRadius: 15,
                       offset: const Offset(0, 5),
                     ),

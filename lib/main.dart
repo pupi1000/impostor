@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/intro_screen.dart';
+import 'features/intro/presentation/screens/intro_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,8 @@ class _ImpostorGameState extends State<ImpostorGame> {
   // Método para alternar el tema
   void _toggleTheme() {
     setState(() {
-      _themeMode = _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+      _themeMode =
+          _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     });
   }
 
